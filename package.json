@@ -4,6 +4,7 @@
   "description": "ReadMe generator in the cmd line",
   "main": "generateMarkdown.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
