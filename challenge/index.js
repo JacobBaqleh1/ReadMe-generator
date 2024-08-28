@@ -1,3 +1,5 @@
+import generateMarkdown from "./generateMarkdown.mjs";
+import fs from "fs";
 import inquirer from "inquirer";
 
 const questions = [
@@ -48,6 +50,7 @@ const questions = [
     name: "license",
     message: "What license does your project have?",
     choices: [
+      "No License",
       "Apache License 2.0",
       "GNU General Public License v3.0",
       "MIT License",
@@ -60,7 +63,6 @@ const questions = [
       "GNU General Public License v2.0",
       "GNU Lesser General Public License v2.1",
       "Mozilla Public License 2.0",
-      "The Unlicense",
     ],
   },
   {
@@ -78,7 +80,12 @@ const questions = [
     type: "input",
     name: "questions",
     message:
-      "Enter your github profile if anyone using your project has questions",
+      "Enter your github profile username for if anyone using your project has questions",
+  },
+  {
+    type: "input",
+    name: "emailQuestions",
+    message: "Enter your email for if anyone using your project has questions",
   },
 ];
 
@@ -86,45 +93,22 @@ console.log("------------Start of the Project------------");
 inquirer
   .prompt(questions)
   .then((answers) => {
-    // TODO: Create a function that returns a license badge based on which license is passed in
-    // If there is no license, return an empty string
-    function renderLicenseBadge(license) {}
+    const markdown = generateMarkdown(answers);
+    const createFile = function (markdown) {
+      fs.writeFile("README.md", markdown, (err) => {
+        if (err) {
+          throw err;
+        }
+        console.log("file created");
+      });
+    };
 
-    // TODO: Create a function that returns the license link
-    // If there is no license, return an empty string
-    function renderLicenseLink(license) {}
-
-    // TODO: Create a function that returns the license section of README
-    // If there is no license, return an empty string
-    function renderLicenseSection(license) {}
-
-    // TODO: Create a function to generate markdown for README
-    //Title , Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions
-    function generateMarkdown(data) {
-      return `# ${data.title}
-##Description
-${data.description}
-## Table of Contents
-##Installation
-${data.installation}
-##Usage
-${data.usage}
-${renderLicenseSection()}
-##Contributing
-${data.contributing}
-##Tests
-${data.tests}
-##Questions
-${data.questions}
-`;
-    }
+    createFile(markdown);
   })
   .catch((error) => {
     if (error.isTtyError) {
-      // Prompt couldn't be rendered in the current environment
+      console.log("Prompt couldn't be rendered in the current environment");
     } else {
-      // Something else went wrong
+      console.log("Something else went wrong");
     }
   });
-
-export default generateMarkdown;
