@@ -1,21 +1,5 @@
-# ff
+# ReadMe-generator
+## Walkthrough Video Link
+https://drive.google.com/file/d/1To40LY5zBTmr0JHUbMS1OFUJHmGWjHqL/view
 ##Description
-ff
-## Table of Contents
- -Installation 
--Usage 
- -License 
--Contributing 
--Tests 
--Questions 
-##Installation
-ff
-##Usage
-
-undefined
-##Contributing
-
-##Tests
-
-##Questions
-
+User can quickly get their readme file up and running
